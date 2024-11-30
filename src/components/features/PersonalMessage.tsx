@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { MessageCircle, Heart, ArrowRight, Star, Coffee, Smile } from 'lucide-react'
+import { MessageCircle, ArrowRight, Star, Coffee, Smile } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 

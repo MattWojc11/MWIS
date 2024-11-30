@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ExternalLink, Code, Github, Globe, Zap, Lock, Users, ArrowRight } from 'lucide-react'
+import { ExternalLink, Code, Github,  } from 'lucide-react'
 
 const categories = ['Wszystkie', 'Web Apps', 'E-commerce', 'Landing Pages', 'Aplikacje']
 
@@ -183,7 +183,6 @@ const projects = [
 export default function PortfolioPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('Wszystkie')
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null)
 
   useEffect(() => {
     setIsVisible(true)
@@ -327,8 +326,6 @@ export default function PortfolioPage() {
                   ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
                 `}
                 style={{ transitionDelay: `${index * 100}ms` }}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
               >
                 {/* Project Image */}
                 <div className="relative h-64 overflow-hidden">

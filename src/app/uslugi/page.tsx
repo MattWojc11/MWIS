@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Layout, Zap, Clock, CheckCircle, ArrowRight } from 'lucide-react'
+import { Layout, Clock, CheckCircle, ArrowRight } from 'lucide-react'
 
 const services = [
   {
@@ -92,24 +92,6 @@ const benefits = [
     ]
   }
 ]
-
-// Dodajmy nową funkcję pomocniczą dla animacji
-const slideVariants = (index: number, direction: 'x' | 'y' = 'y') => ({
-  hidden: {
-    opacity: 0,
-    [direction === 'x' ? 'translateX' : 'translateY']: direction === 'x' ? 
-      (index % 2 === 0 ? -40 : 40) : 40
-  },
-  visible: {
-    opacity: 1,
-    [direction === 'x' ? 'translateX' : 'translateY']: 0,
-    transition: {
-      duration: 0.5,
-      delay: index * 0.2,
-      ease: [0.43, 0.13, 0.23, 0.96]
-    }
-  }
-})
 
 export default function ServicesPage() {
   const [isVisible, setIsVisible] = useState(false)
