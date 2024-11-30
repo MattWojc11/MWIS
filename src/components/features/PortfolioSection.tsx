@@ -2,49 +2,29 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight, Globe, ShoppingCart, BarChart3, Laptop } from 'lucide-react'
+import { ArrowRight, Globe, Smartphone } from 'lucide-react'
 import Link from 'next/link'
 
 const projects = [
   {
     id: 1,
-    title: 'E-commerce Premium',
-    type: 'Sklep Internetowy',
-    image: 'https://images.unsplash.com/photo-1661956602868-6ae368943878',
-    tech: ['Next.js', 'Tailwind CSS', 'Stripe'],
-    description: 'Nowoczesny sklep internetowy z zaawansowanym systemem płatności',
-    icon: ShoppingCart,
+    title: 'Aplikacja Treningowa',
+    type: 'Aplikacje',
+    image: '/images/apk1.png',
+    tech: ['React Native', 'TypeScript', 'Firebase', 'Redux'],
+    description: 'Kompleksowa aplikacja mobilna do planowania treningów i monitorowania postępów. Intuicyjny interfejs pozwala na łatwe śledzenie aktywności fizycznej.',
+    icon: Smartphone,
     link: '#'
   },
   {
     id: 2,
-    title: 'Dashboard Analytics',
-    type: 'Panel Administracyjny',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
-    tech: ['React', 'TypeScript', 'Chart.js'],
-    description: 'System analityczny z zaawansowaną wizualizacją danych',
-    icon: BarChart3,
-    link: '#'
-  },
-  {
-    id: 3,
-    title: 'Corporate Website',
-    type: 'Strona Firmowa',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
-    tech: ['WordPress', 'PHP', 'MySQL'],
-    description: 'Responsywna strona z systemem CMS dla dużej firmy',
+    title: 'Strona Przychodni Lekarskiej',
+    type: 'Web Apps',
+    image: '/images/doc1.png',
+    tech: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
+    description: 'Profesjonalna strona internetowa przychodni medycznej z systemem umawiania wizyt online i dostępem do dokumentacji medycznej.',
     icon: Globe,
-    link: '#'
-  },
-  {
-    id: 4,
-    title: 'SaaS Platform',
-    type: 'Aplikacja Webowa',
-    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166',
-    tech: ['Vue.js', 'Node.js', 'MongoDB'],
-    description: 'Platforma do zarządzania projektami online',
-    icon: Laptop,
-    link: '#'
+    link: 'https://doctorsite-pearl.vercel.app'
   }
 ]
 

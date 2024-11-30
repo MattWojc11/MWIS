@@ -2,28 +2,44 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ExternalLink, Code, Github,  } from 'lucide-react'
+import { ExternalLink, Code, Github, X } from 'lucide-react'
 
 const categories = ['Wszystkie', 'Web Apps', 'E-commerce', 'Landing Pages', 'Aplikacje']
+
+const projectImages = [
+  '/images/apk1.png',
+  '/images/apk2.png',
+  '/images/apk3.png',
+  '/images/apk4.png',
+  '/images/apk5.png'
+]
+
+const documentationImages = [
+  '/images/doc1.png',
+  '/images/doc2.png',
+  '/images/doc3.png',
+  '/images/doc4.png'
+]
 
 const projects = [
   {
     id: 1,
-    title: 'System ERP',
-    category: 'Web Apps',
-    image: '/projects/erp.jpg',
-    description: 'Kompleksowy system zarządzania zasobami przedsiębiorstwa z modułami finansów, HR i logistyki.',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Docker'],
+    title: 'Aplikacja Treningowa',
+    category: 'Aplikacje',
+    image: '/images/apk1.png',
+    gallery: projectImages,
+    description: 'Kompleksowa aplikacja mobilna do planowania treningów i monitorowania postępów. Intuicyjny interfejs pozwala na łatwe śledzenie aktywności fizycznej.',
+    technologies: ['React Native', 'TypeScript', 'Firebase', 'Redux'],
     features: [
-      'Real-time dashboards',
-      'System uprawnień',
-      'Integracja API',
-      'Automatyczne raporty'
+      'Plany treningowe',
+      'Śledzenie postępów',
+      'Biblioteka ćwiczeń',
+      'Statystyki treningowe'
     ],
     stats: {
-      users: '500+',
-      transactions: '1M+',
-      uptime: '99.9%'
+      users: '1k+',
+      workouts: '50k+',
+      rating: '4.8/5'
     },
     demoUrl: '#',
     githubUrl: '#',
@@ -31,158 +47,33 @@ const projects = [
   },
   {
     id: 2,
-    title: 'E-commerce Platform',
-    category: 'E-commerce',
-    image: '/projects/shop.jpg',
-    description: 'Zaawansowana platforma e-commerce z systemem zarządzania produktami i integracją płatności.',
-    technologies: ['Next.js', 'TypeScript', 'Stripe', 'MongoDB'],
+    title: 'Strona Przychodni Lekarskiej',
+    category: 'Web Apps',
+    image: '/images/doc1.png',
+    gallery: documentationImages,
+    description: 'Profesjonalna strona internetowa przychodni medycznej z systemem umawiania wizyt online i dostępem do dokumentacji medycznej.',
+    technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
     features: [
-      'Koszyk zakupowy',
-      'System płatności',
-      'Panel admina',
-      'Analityka sprzedaży'
+      'System rezerwacji wizyt',
+      'Panel pacjenta',
+      'Historia leczenia',
+      'Dokumentacja medyczna'
     ],
     stats: {
-      products: '10k+',
-      orders: '50k+',
-      conversion: '3.2%'
+      pacjenci: '2k+',
+      wizyty: '500+',
+      lekarze: '20+'
     },
-    demoUrl: '#',
+    demoUrl: 'https://doctorsite-pearl.vercel.app',
     githubUrl: '#',
     liveSite: true
-  },
-  {
-    id: 3,
-    title: 'Landing Page Restauracji',
-    category: 'Landing Pages',
-    image: '/projects/restaurant.jpg',
-    description: 'Nowoczesna strona restauracji z systemem rezerwacji stolików i menu online.',
-    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-    features: [
-      'Rezerwacje online',
-      'Menu cyfrowe',
-      'Galeria zdjęć',
-      'Integracja z social media'
-    ],
-    stats: {
-      visitors: '15k+',
-      reservations: '500+',
-      rating: '4.9/5'
-    },
-    demoUrl: '#',
-    liveSite: true
-  },
-  {
-    id: 4,
-    title: 'Aplikacja Fitness',
-    category: 'Aplikacje',
-    image: '/projects/fitness.jpg',
-    description: 'Aplikacja do śledzenia treningów i diety z personalizowanymi planami.',
-    technologies: ['React Native', 'Firebase', 'Node.js'],
-    features: [
-      'Plany treningowe',
-      'Licznik kalorii',
-      'Postępy użytkownika',
-      'Powiadomienia'
-    ],
-    stats: {
-      downloads: '25k+',
-      activeUsers: '8k+',
-      workouts: '100k+'
-    },
-    demoUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    id: 5,
-    title: 'Portfolio Fotografa',
-    category: 'Landing Pages',
-    image: '/projects/portfolio.jpg',
-    description: 'Minimalistyczne portfolio fotografa z zaawansowaną galerią i animacjami.',
-    technologies: ['Gatsby', 'GSAP', 'Netlify CMS'],
-    features: [
-      'Galeria masonry',
-      'Lazy loading',
-      'Blog',
-      'Formularz kontaktowy'
-    ],
-    stats: {
-      photos: '200+',
-      clients: '50+',
-      views: '30k+'
-    },
-    demoUrl: '#',
-    liveSite: true
-  },
-  {
-    id: 6,
-    title: 'Panel Administracyjny',
-    category: 'Web Apps',
-    image: '/projects/admin.jpg',
-    description: 'Zaawansowany panel administracyjny z analizą danych i raportami.',
-    technologies: ['Vue.js', 'Laravel', 'MySQL', 'Redis'],
-    features: [
-      'Dashboard analityczny',
-      'Zarządzanie użytkownikami',
-      'System raportów',
-      'Eksport danych'
-    ],
-    stats: {
-      actions: '1M+',
-      reports: '5k+',
-      dataPoints: '10M+'
-    },
-    demoUrl: '#',
-    githubUrl: '#',
-    liveSite: true
-  },
-  {
-    id: 7,
-    title: 'Sklep z Elektroniką',
-    category: 'E-commerce',
-    image: '/projects/electronics.jpg',
-    description: 'Sklep internetowy z elektroniką i systemem porównywania produktów.',
-    technologies: ['Shopify', 'Next.js', 'GraphQL'],
-    features: [
-      'Porównywarka produktów',
-      'Filtrowanie zaawansowane',
-      'Opinie klientów',
-      'Integracja z dostawcami'
-    ],
-    stats: {
-      products: '5k+',
-      sales: '1M+',
-      customers: '50k+'
-    },
-    demoUrl: '#',
-    liveSite: true
-  },
-  {
-    id: 8,
-    title: 'Aplikacja CRM',
-    category: 'Web Apps',
-    image: '/projects/crm.jpg',
-    description: 'System CRM do zarządzania relacjami z klientami i sprzedażą.',
-    technologies: ['Angular', 'Django', 'PostgreSQL'],
-    features: [
-      'Pipeline sprzedaży',
-      'Automatyzacja zadań',
-      'Integracja z email',
-      'Raporty sprzedażowe'
-    ],
-    stats: {
-      leads: '100k+',
-      deals: '10k+',
-      automation: '1k+'
-    },
-    demoUrl: '#',
-    githubUrl: '#'
   }
 ]
 
 export default function PortfolioPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('Wszystkie')
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   useEffect(() => {
     setIsVisible(true)
@@ -235,7 +126,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className={`
-              space-y-8
+              space-y-12
               transition-all duration-1000 delay-200
               ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}
             `}>
@@ -274,18 +165,20 @@ export default function PortfolioPage() {
               </div>
             </div>
 
+            {/* Zdjęcie zespołu */}
             <div className={`
               relative aspect-square rounded-2xl overflow-hidden
-              transition-all duration-1000 delay-400
+              transition-all duration-1000 delay-400 group
               ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}
             `}>
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent" />
               <Image
-                src="/images/code.jpg"
-                alt="Code preview"
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80"
+                alt="Team working together"
                 fill
                 className="object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-blue-900/20" />
             </div>
           </div>
         </div>
@@ -404,12 +297,75 @@ export default function PortfolioPage() {
                       ))}
                     </div>
                   </div>
+
+                  {/* Gallery */}
+                  {project.gallery && (
+                    <div className="mt-6 pt-6 border-t border-white/10">
+                      <h4 className="text-lg font-semibold mb-4 text-white">Galeria projektu</h4>
+                      <div className="grid grid-cols-6 gap-4">
+                        {/* Duże główne zdjęcie */}
+                        <div 
+                          className="col-span-6 md:col-span-4 relative h-64 rounded-lg overflow-hidden cursor-pointer group"
+                          onClick={() => setSelectedImage(project.gallery[0])}
+                        >
+                          <Image
+                            src={project.gallery[0]}
+                            alt={`${project.title} - główne zdjęcie`}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        {/* Mniejsze zdjęcia */}
+                        <div className="col-span-6 md:col-span-2 grid grid-cols-2 gap-4">
+                          {project.gallery.slice(1, 5).map((img, idx) => (
+                            <div 
+                              key={idx}
+                              className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
+                              onClick={() => setSelectedImage(img)}
+                            >
+                              <Image
+                                src={img}
+                                alt={`${project.title} - zdjęcie ${idx + 2}`}
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+          <div className="relative w-full max-w-5xl aspect-video">
+            <Image
+              src={selectedImage}
+              alt="Powiększone zdjęcie"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+      )}
     </main>
   )
 } 

@@ -5,7 +5,6 @@ import ProcessSection from '@/components/features/ProcessSection'
 import PortfolioSection from '@/components/features/PortfolioSection'
 import PricingSection from '@/components/features/PricingSection'
 import TeamSection from '@/components/features/TeamSection'
-import BrandShowcase from '@/components/features/BrandShowcase'
 
 export default function Home() {
   return (
@@ -17,7 +16,7 @@ export default function Home() {
       <PortfolioSection />
       <PricingSection />
       <TeamSection />
-      <BrandShowcase />
+      
     </>
   )
 }
