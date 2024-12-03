@@ -173,14 +173,17 @@ export default function PricingSection() {
                 ))}
               </ul>
 
-              <button className={`
-                w-full py-4 rounded-xl font-medium transition-all duration-300
-                ${variant.popular 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                  : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}
-              `}>
+              <Link 
+                href={`/formularz?package=${encodeURIComponent(`${plans[activeType].name} - ${variant.name}`)}&price=${variant.price}`}
+                className={`
+                  block w-full py-4 rounded-xl font-medium text-center transition-all duration-300
+                  ${variant.popular 
+                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}
+                `}
+              >
                 Wybierz pakiet
-              </button>
+              </Link>
             </div>
           ))}
         </div>
