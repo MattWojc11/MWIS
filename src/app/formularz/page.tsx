@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import emailjs from '@emailjs/browser'
 import { Package, User, Mail, MessageSquare, Send } from 'lucide-react'
@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 // Stała dla minimalnego odstępu między wysyłkami (50 sekund)
 const MIN_SUBMISSION_INTERVAL = 50000
 
-export default function FormPage() {
+function FormContent() {
   const searchParams = useSearchParams()
   const [isVisible, setIsVisible] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -310,5 +310,26 @@ export default function FormPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function FormPage() {
+  return (
+    <Suspense fallback={
+      <main className="pt-24 min-h-screen bg-[#0A0F1C] text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-2xl animate-pulse">
+              <div className="w-8 h-8" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-serif mb-4">
+              Ładowanie <span className="text-blue-400">formularza</span>...
+            </h1>
+          </div>
+        </div>
+      </main>
+    }>
+      <FormContent />
+    </Suspense>
   )
 } 
