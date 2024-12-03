@@ -11,7 +11,7 @@ const plans = [
     variants: [
       {
         name: 'Z gotowego portfolio',
-        price: '500',
+        price: '599',
         features: [
           'Strona jednostronicowa',
           'Projekt z gotowego portfolio',
@@ -23,7 +23,7 @@ const plans = [
       },
       {
         name: 'Indywidualny projekt',
-        price: '800',
+        price: '899',
         popular: true,
         features: [
           'Strona jednostronicowa',
@@ -42,7 +42,7 @@ const plans = [
     variants: [
       {
         name: 'Z gotowego portfolio',
-        price: '800',
+        price: '1059',
         features: [
           'Strona główna + podstrony',
           'Projekt z gotowego portfolio',
@@ -54,7 +54,7 @@ const plans = [
       },
       {
         name: 'Indywidualny projekt',
-        price: '1000',
+        price: '1299',
         popular: true,
         features: [
           'Strona główna + podstrony',

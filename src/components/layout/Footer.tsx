@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* O nas */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-4">MWIS</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">VeloWeb</h3>
             <p className="text-gray-400 mb-4">
               Tworzymy profesjonalne strony internetowe, które pomagają firmom zaistnieć w sieci.
             </p>
@@ -21,7 +21,7 @@ export default function Footer() {
               <a href="#" className="hover:text-pink-500 transition-colors">
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="mailto:kontakt@mwis.pl" className="hover:text-blue-400 transition-colors">
+              <a href="mailto:kontakt@veloweb.pl" className="hover:text-blue-400 transition-colors">
                 <Mail className="h-6 w-6" />
               </a>
             </div>
@@ -70,18 +70,18 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                kontakt@mwis.pl
+                kontakt@veloweb.pl
               </li>
               <li className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />
-                Warszawa, Polska
+                Głogów, Polska
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p>&copy; {new Date().getFullYear()} MWIS. Wszelkie prawa zastrzeżone.</p>
+          <p>&copy; {new Date().getFullYear()} VeloWeb. Wszelkie prawa zastrzeżone.</p>
         </div>
       </div>
     </footer>

@@ -10,26 +10,21 @@ const processes = [
   },
   {
     number: '02',
-    title: 'Projekt Strony',
-    description: 'Przygotowujemy projekt graficzny dostosowany do Twojej marki.'
-  },
-  {
-    number: '03',
     title: 'Rozwój',
     description: 'Tworzymy stronę z wykorzystaniem nowoczesnych technologii i najlepszych praktyk.'
   },
   {
-    number: '04',
+    number: '03',
     title: 'Optymalizacja',
     description: 'Dbamy o szybkość działania i pozycjonowanie w wyszukiwarkach.'
   },
   {
-    number: '05',
+    number: '04',
     title: 'Wdrożenie',
     description: 'Publikujemy stronę i przeprowadzamy niezbędne testy.'
   },
   {
-    number: '06',
+    number: '05',
     title: 'Wsparcie',
     description: 'Zapewniamy stałą administrację i rozwój Twojej strony.'
   }
@@ -77,26 +72,23 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
-          <div className="md:col-span-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+          <div className="md:col-span-2">
             <ProcessCard process={processes[0]} index={0} isVisible={isVisible} activeStep={activeStep} setActiveStep={setActiveStep} />
           </div>
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <ProcessCard process={processes[1]} index={1} isVisible={isVisible} activeStep={activeStep} setActiveStep={setActiveStep} />
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <ProcessCard process={processes[2]} index={2} isVisible={isVisible} activeStep={activeStep} setActiveStep={setActiveStep} />
           </div>
-          <div className="md:col-span-4">
+          <div className="md:col-span-2">
             <ProcessCard process={processes[3]} index={3} isVisible={isVisible} activeStep={activeStep} setActiveStep={setActiveStep} />
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-5">
             <ProcessCard process={processes[4]} index={4} isVisible={isVisible} activeStep={activeStep} setActiveStep={setActiveStep} />
-          </div>
-          <div className="md:col-span-3">
-            <ProcessCard process={processes[5]} index={5} isVisible={isVisible} activeStep={activeStep} setActiveStep={setActiveStep} />
           </div>
         </div>
       </div>

@@ -2,18 +2,19 @@
 
 import { useEffect, useState } from 'react'
 import { Mail, Phone, Send, Clock } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const contactInfo = [
   {
     title: 'Kontakt',
     description: 'Skontaktuj się z nami w sprawie Twojego projektu',
-    email: 'kontakt@mwis.pl',
-    phone: '+48 500 600 700'
+    email: 'mateusz.wojcikk11@gmail.com',
+    phone: '+48 512 847 175'
   },
   {
     title: 'Wsparcie techniczne',
     description: 'Pomożemy Ci rozwiązać każdy problem techniczny',
-    email: 'support@mwis.pl'
+    email: 'mateusz.wojcikk11@gmail.com'
   }
 ]
 
@@ -38,11 +39,53 @@ export default function ContactPage() {
     setIsVisible(true)
   }, [])
 
+  useEffect(() => {
+    emailjs.init({
+      publicKey: "XanjWpTw6am6zERZK",
+      blockHeadless: false,
+    })
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
+    
+    try {
+      const result = await emailjs.send(
+        'service_07sz71q',
+        'template_9jarsnh',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'mateusz.wojcikk11@gmail.com'
+        }
+      )
+
+      if (result.status === 200) {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+        
+        alert('Wiadomość została wysłana!')
+      } else {
+        throw new Error('Błąd wysyłania wiadomości')
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Błąd wysyłania:', error.message)
+      } else {
+        console.error('Nieznany błąd:', error)
+      }
+      alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -170,7 +213,7 @@ export default function ContactPage() {
                       id="name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg 
+                      className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
                         focus:ring-0 focus:bg-white transition-all placeholder-transparent
                         group-hover:bg-gray-100"
                       placeholder="Imię i nazwisko"
@@ -194,7 +237,7 @@ export default function ContactPage() {
                       id="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg 
+                      className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
                         focus:ring-0 focus:bg-white transition-all placeholder-transparent
                         group-hover:bg-gray-100"
                       placeholder="Email"
@@ -219,7 +262,7 @@ export default function ContactPage() {
                     id="subject"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg 
+                    className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
                       focus:ring-0 focus:bg-white transition-all placeholder-transparent
                       group-hover:bg-gray-100"
                     placeholder="Temat"
@@ -243,7 +286,7 @@ export default function ContactPage() {
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg 
+                    className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
                       focus:ring-0 focus:bg-white transition-all placeholder-transparent resize-none
                       group-hover:bg-gray-100"
                     placeholder="Wiadomość"
@@ -297,7 +340,7 @@ export default function ContactPage() {
           `}>
             <div className="relative h-[500px]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156388.35439831157!2d20.92111271889184!3d52.233033197855694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669a869f01%3A0x72f0be2a88ead3fc!2sWarszawa!5e0!3m2!1spl!2spl!4v1701101001001!5m2!1spl!2spl"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2493.2075300765153!2d16.078719!3d51.663742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f5f3b8e8b8b8b%3A0x2e8b8b8b8b8b8b8b!2sG%C5%82og%C3%B3w!5e0!3m2!1spl!2spl!4v1701101001001!5m2!1spl!2spl"
                 width="100%"
                 height="100%"
                 style={{ border: 0, position: 'absolute', inset: 0 }}
@@ -309,7 +352,7 @@ export default function ContactPage() {
             </div>
             <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg">
               <p className="text-gray-900 font-medium text-center">
-                Znajdziesz nas w centrum Warszawy
+                Znajdziesz nas w centrum Głogowa
               </p>
             </div>
           </div>

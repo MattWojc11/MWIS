@@ -6,25 +6,14 @@ import { Mail, Phone, ArrowUpRight } from 'lucide-react'
 
 const team = [
   {
-    name: 'Anna Kowalska',
+    name: 'Mateusz Wójcik',
     role: 'CEO & Founder',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956',
-    bio: 'Ekspert w dziedzinie projektowania stron internetowych z 8-letnim doświadczeniem.',
-    specialties: ['Web Design', 'UX/UI', 'Zarządzanie Projektami'],
+    image: '/images/pers.png',
+    bio: 'Ekspert w dziedzinie tworzenia stron internetowych z 4-letnim doświadczeniem.',
+    specialties: ['Next.js', 'React', 'Zarządzanie Projektami'],
     contact: {
-      email: 'anna@mwis.pl',
-      phone: '+48 500 600 700'
-    }
-  },
-  {
-    name: 'Piotr Nowak',
-    role: 'Lead Developer',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-    bio: 'Programista full-stack specjalizujący się w nowoczesnych technologiach webowych.',
-    specialties: ['React', 'Node.js', 'TypeScript'],
-    contact: {
-      email: 'piotr@mwis.pl',
-      phone: '+48 500 600 800'
+      email: 'mateusz.wojcikk11@gmail.com',
+      phone: '+48 512 847 175'
     }
   }
 ]
@@ -77,7 +66,7 @@ export default function TeamSection() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-1 gap-12 max-w-2xl mx-auto">
           {team.map((member, index) => (
             <div
               key={member.name}

@@ -42,7 +42,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center relative z-50">
             <Link href="/" className="text-2xl font-bold text-white">
-              MWIS
+              VeloWeb
             </Link>
 
             <button
@@ -68,6 +68,7 @@ export default function Header() {
         <div className="h-screen flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="space-y-12">
             {[
+              { href: '/', label: 'Strona główna' },
               { href: '/uslugi', label: 'Usługi' },
               { href: '/o-nas', label: 'O nas' },
               { href: '/portfolio', label: 'Portfolio' },
@@ -99,8 +100,8 @@ export default function Header() {
             transform ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
           `}>
             <p className="text-sm uppercase tracking-wider mb-2">Kontakt</p>
-            <a href="mailto:kontakt@mwis.pl" className="text-white hover:text-blue-400 transition-colors">
-              kontakt@mwis.pl
+            <a href="mailto:kontakt@veloweb.pl" className="text-white hover:text-blue-400 transition-colors">
+              kontakt@veloweb.pl
             </a>
           </div>
         </div>

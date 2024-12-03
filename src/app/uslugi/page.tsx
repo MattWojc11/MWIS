@@ -9,7 +9,7 @@ const services = [
     variants: [
       {
         name: 'Z gotowego portfolio',
-        price: '300',
+        price: '599',
         features: [
           'Szybka realizacja',
           'Responsywny design',
@@ -19,7 +19,7 @@ const services = [
       },
       {
         name: 'Indywidualny projekt',
-        price: '500',
+        price: '899',
         popular: true,
         features: [
           'Unikalna identyfikacja wizualna',
@@ -36,7 +36,7 @@ const services = [
     variants: [
       {
         name: 'Z gotowego portfolio',
-        price: '800',
+        price: '1059',
         features: [
           'Do 5 podstron',
           'System zarządzania treścią',
@@ -46,7 +46,7 @@ const services = [
       },
       {
         name: 'Indywidualny projekt',
-        price: '1000',
+        price: '1299',
         popular: true,
         features: [
           'Nielimitowane podstrony',

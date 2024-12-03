@@ -21,7 +21,7 @@ export default function Hero() {
             ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
           `}>
             <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-            <span>Warszawa, PL</span>
+            <span>Głogów, PL</span>
           </div>
 
           <div className="overflow-hidden mb-8">

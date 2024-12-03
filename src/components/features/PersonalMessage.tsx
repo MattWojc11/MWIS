@@ -87,19 +87,19 @@ export default function PersonalMessage() {
                   <p className="text-lg text-gray-700 leading-relaxed mb-6">
                     Wiem że zależy ci na przejrzystej, intuicyjnej i w pełni przystępnej stronie www. 
                     Słyszałem to już wiele razy: ma być jak miłość od pierwszego wejrzenia. 
-                    Właściwie nawet musi być, bo twoi odbiorcy szybko się nudzą.
+                    
                   </p>
                   <p className="text-lg text-gray-700 leading-relaxed">
                     Dlatego mogę cię zapewnić, że razem z moim świetnym zespołem stworzymy twoją wizytówkę 
                     z sercem i pasją. Poświęć chwilkę i obejrzyj nasze projekty, sprawdź co ci się przyda i działajmy!
                   </p>
                 </div>
-                <div className="flex-none w-64 h-64 relative">
+                <div className="flex-none w-80 h-80 relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a"
+                    src="/images/pers.png"
                     alt="Professional developer"
                     fill
-                    className="object-cover rounded-2xl"
+                    className="object-contain rounded-2xl"
                   />
                 </div>
               </div>

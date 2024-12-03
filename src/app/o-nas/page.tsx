@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Users, Target, Award, Clock, ArrowRight } from 'lucide-react'
+import { Users, Target, Award, Clock, ArrowRight, Code, Laptop, Zap, Shield, Heart, Star } from 'lucide-react'
 
 const achievements = [
   {
@@ -19,7 +19,7 @@ const achievements = [
   },
   {
     icon: Award,
-    number: '8+',
+    number: '4+',
     label: 'Lat Doświadczenia',
     description: 'W tworzeniu stron internetowych'
   },
@@ -28,6 +28,33 @@ const achievements = [
     number: '100%',
     label: 'Terminowość',
     description: 'Projekty dostarczane na czas'
+  }
+]
+
+const technologies = [
+  { name: 'Next.js', icon: Code },
+  { name: 'React', icon: Laptop },
+  { name: 'TypeScript', icon: Code },
+  { name: 'Tailwind CSS', icon: Zap },
+  { name: 'Node.js', icon: Shield },
+  { name: 'MongoDB', icon: Star }
+]
+
+const whyUs = [
+  {
+    title: 'Indywidualne podejście',
+    description: 'Każdy projekt traktujemy jako unikalne wyzwanie. Dostosowujemy nasze rozwiązania do Twoich potrzeb i celów biznesowych.',
+    icon: Heart
+  },
+  {
+    title: 'Nowoczesne technologie',
+    description: 'Wykorzystujemy najnowsze technologie i frameworki, aby zapewnić najwyższą jakość i wydajność Twojej strony.',
+    icon: Code
+  },
+  {
+    title: 'Wsparcie po wdrożeniu',
+    description: 'Nie kończymy współpracy po uruchomieniu strony. Zapewniamy stałe wsparcie techniczne i pomoc w rozwoju.',
+    icon: Shield
   }
 ]
 
@@ -127,13 +154,18 @@ export default function AboutPage() {
               </h2>
               <div className="prose prose-lg text-gray-600">
                 <p>
-                  Od początku naszej działalności skupiamy się na dostarczaniu najwyższej jakości 
-                  stron internetowych. Zaczynaliśmy jako mały zespół pasjonatów, a dziś jesteśmy 
-                  zaufanym partnerem dla firm z różnych branż.
+                  Od początku mojej działalności skupiam się na dostarczaniu najwyższej jakości 
+                  stron internetowych. Moja pasja do tworzenia nowoczesnych i funkcjonalnych 
+                  stron internetowych przekłada się na zadowolenie klientów.
                 </p>
                 <p>
-                  Naszą misją jest tworzenie stron internetowych, które nie tylko świetnie wyglądają, 
-                  ale przede wszystkim skutecznie realizują cele biznesowe naszych klientów.
+                  Specjalizuję się w technologiach frontendowych, szczególnie w React i Next.js, 
+                  co pozwala mi tworzyć wydajne i responsywne aplikacje webowe. Każdy projekt 
+                  traktuję jako okazję do dostarczenia wartości dla klienta.
+                </p>
+                <p>
+                  Moim celem jest nie tylko tworzenie pięknych stron, ale przede wszystkim 
+                  dostarczanie rozwiązań, które realnie wspierają rozwój biznesu moich klientów.
                 </p>
               </div>
             </div>
@@ -144,12 +176,76 @@ export default function AboutPage() {
               <div className="relative h-[600px] rounded-2xl overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
-                  alt="Zespół MWIS"
+                  alt="Zespół VeloWeb"
                   fill
                   className="object-cover"
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologie */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-serif text-center text-gray-900 mb-6">
+            Technologie, które <span className="text-blue-600">wykorzystuję</span>
+          </h2>
+          <p className="text-center text-gray-600 max-w-3xl mx-auto mb-16">
+            Pracuję z najnowszymi technologiami webowymi, które pozwalają tworzyć 
+            szybkie, bezpieczne i skalowalne aplikacje internetowe.
+          </p>
+          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {technologies.map((tech, index) => (
+              <div
+                key={tech.name}
+                className={`
+                  group p-6 bg-gray-50 rounded-xl text-center hover:bg-blue-50 transition-all duration-300
+                  ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+                `}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4 group-hover:bg-blue-200 transition-colors">
+                  <tech.icon className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900">{tech.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Dlaczego my */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-serif text-center text-gray-900 mb-6">
+            Dlaczego warto <span className="text-blue-600">wybrać nas?</span>
+          </h2>
+          <p className="text-center text-gray-600 max-w-3xl mx-auto mb-16">
+            Łączę technologiczną wiedzę z kreatywnością, aby dostarczać rozwiązania, 
+            które nie tylko wyglądają świetnie, ale przede wszystkim spełniają swoje cele biznesowe.
+          </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            {whyUs.map((item, index) => (
+              <div
+                key={item.title}
+                className={`
+                  relative p-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300
+                  ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+                `}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl opacity-20" />
+                <div className="relative">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mb-6">
+                    <item.icon className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

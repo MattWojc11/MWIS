@@ -11,7 +11,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'MWIS - Agencja Cyfrowa',
+  title: 'VeloWeb',
   description: 'Twój Partner w Transformacji Cyfrowej',
 }
 

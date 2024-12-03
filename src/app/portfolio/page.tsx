@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ExternalLink, Code, Github, X } from 'lucide-react'
+import { ExternalLink, Code, X } from 'lucide-react'
 
 const categories = ['Wszystkie', 'Web Apps', 'E-commerce', 'Landing Pages', 'Aplikacje']
 
@@ -74,6 +74,9 @@ export default function PortfolioPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('Wszystkie')
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [activeProject, setActiveProject] = useState<typeof projects[0] | null>(null)
 
   useEffect(() => {
     setIsVisible(true)
@@ -82,6 +85,34 @@ export default function PortfolioPage() {
   const filteredProjects = selectedCategory === 'Wszystkie'
     ? projects
     : projects.filter(project => project.category === selectedCategory)
+
+  const openGallery = (project: typeof projects[0], e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setActiveProject(project)
+    setIsGalleryOpen(true)
+    setCurrentImageIndex(0)
+  }
+
+  const closeGallery = () => {
+    setIsGalleryOpen(false)
+    setActiveProject(null)
+    setCurrentImageIndex(0)
+  }
+
+  const nextImage = () => {
+    if (!activeProject) return
+    setCurrentImageIndex((prev) => 
+      prev === activeProject.gallery.length - 1 ? 0 : prev + 1
+    )
+  }
+
+  const prevImage = () => {
+    if (!activeProject) return
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? activeProject.gallery.length - 1 : prev - 1
+    )
+  }
 
   return (
     <main className="pt-24 min-h-screen bg-[#0A0F1C] text-white">
@@ -109,14 +140,6 @@ export default function PortfolioPage() {
             <p className="text-xl text-gray-300 mb-8">
               Znajdź coś dla siebie i przekonaj się o jakości naszych rozwiązań technologicznych.
             </p>
-            <div className="flex justify-center space-x-4">
-              <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-                Skontaktuj się
-              </button>
-              <button className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
-                Zobacz projekty
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -240,14 +263,22 @@ export default function PortfolioPage() {
 
                   {/* Links */}
                   <div className="absolute top-4 right-4 flex space-x-2">
-                    {project.githubUrl && (
-                      <a href={project.githubUrl} className="p-2 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition-colors">
-                        <Github className="w-5 h-5 text-white" />
-                      </a>
-                    )}
-                    {project.demoUrl && (
-                      <a href={project.demoUrl} className="p-2 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition-colors">
-                        <ExternalLink className="w-5 h-5 text-white" />
+                    {project.id === 1 ? (
+                      <button 
+                        onClick={(e) => openGallery(project, e)}
+                        type="button"
+                        className="px-4 py-2 bg-blue-600/80 hover:bg-blue-600 rounded-lg backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+                      >
+                        <span className="text-sm font-medium">Zobacz</span>
+                        <ExternalLink className="w-4 h-4 text-white" />
+                      </button>
+                    ) : project.demoUrl && (
+                      <a 
+                        href={project.demoUrl} 
+                        className="px-4 py-2 bg-blue-600/80 hover:bg-blue-600 rounded-lg backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+                      >
+                        <span className="text-sm font-medium">Zobacz</span>
+                        <ExternalLink className="w-4 h-4 text-white" />
                       </a>
                     )}
                   </div>
@@ -306,7 +337,12 @@ export default function PortfolioPage() {
                         {/* Duże główne zdjęcie */}
                         <div 
                           className="col-span-6 md:col-span-4 relative h-64 rounded-lg overflow-hidden cursor-pointer group"
-                          onClick={() => setSelectedImage(project.gallery[0])}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openGallery(project, e);
+                            setCurrentImageIndex(0);
+                          }}
                         >
                           <Image
                             src={project.gallery[0]}
@@ -322,7 +358,12 @@ export default function PortfolioPage() {
                             <div 
                               key={idx}
                               className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
-                              onClick={() => setSelectedImage(img)}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                openGallery(project, e);
+                                setCurrentImageIndex(idx + 1);
+                              }}
                             >
                               <Image
                                 src={img}
@@ -343,6 +384,73 @@ export default function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      {/* Enhanced Gallery Modal */}
+      {isGalleryOpen && activeProject && (
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 z-0" onClick={closeGallery} />
+          
+          <div className="relative w-full max-w-7xl px-4">
+            {/* Close button */}
+            <button 
+              onClick={closeGallery}
+              className="absolute top-4 right-4 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors z-20"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Main image */}
+            <div className="relative aspect-video mb-8">
+              <Image
+                src={activeProject.gallery[currentImageIndex]}
+                alt={`${activeProject.title} - zdjęcie ${currentImageIndex + 1}`}
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Thumbnails */}
+            <div className="grid grid-cols-5 gap-4 max-w-4xl mx-auto">
+              {activeProject.gallery.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentImageIndex(idx)}
+                  className={`
+                    relative aspect-square rounded-lg overflow-hidden
+                    ${currentImageIndex === idx ? 'ring-2 ring-blue-500' : 'opacity-50 hover:opacity-100'}
+                    transition-all duration-300
+                  `}
+                >
+                  <Image
+                    src={img}
+                    alt={`Miniatura ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+
+            {/* Navigation arrows */}
+            <button
+              onClick={prevImage}
+              className="absolute left-8 top-1/2 -translate-y-1/2 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-8 top-1/2 -translate-y-1/2 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Image Modal */}
       {selectedImage && (
