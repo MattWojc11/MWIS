@@ -57,13 +57,13 @@ export default function Hero() {
               </p>
             </div>
             <div>
-              <div className="text-6xl font-bold mb-2">125+</div>
+              <div className="text-6xl font-bold mb-2">25+</div>
               <p className="text-sm text-gray-400 uppercase tracking-wider">
                 Zrealizowanych projektów
               </p>
             </div>
             <div>
-              <div className="text-6xl font-bold mb-2">25+</div>
+              <div className="text-6xl font-bold mb-2">5+</div>
               <p className="text-sm text-gray-400 uppercase tracking-wider">
                 Stron pod opieką
               </p>

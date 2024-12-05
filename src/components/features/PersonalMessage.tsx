@@ -40,7 +40,7 @@ export default function PersonalMessage() {
     {
       icon: Coffee,
       title: 'Przyjazna Atmosfera',
-      description: 'Luźne rozmowy przy kawie'
+      description: 'Bezpośredni kontakt i dialog'
     },
     {
       icon: Smile,

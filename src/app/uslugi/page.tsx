@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Layout, Clock, CheckCircle, ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const services = [
   {
@@ -50,13 +51,13 @@ const services = [
         popular: true,
         features: [
           'Nielimitowane podstrony',
-          'Zaawansowany CMS',
+          '1 miesiąc darmowej administracji',
           'Pełna optymalizacja SEO',
           'Unikalna identyfikacja wizualna'
         ]
       }
     ],
-    description: 'Kompleksowe rozwiązanie dla firm, które chcą przyciągnąć klientów poprzez przejrzystą strukturę informacji i lepsze pozycjonowanie w wyszukiwarkach.'
+    description: 'Kompleksowe rozwiązanie dla firm, które chcą przyciągnąć klientów poprzez przejrzystą strukturę informacji.'
   }
 ]
 
@@ -66,7 +67,7 @@ const benefits = [
     description: 'Każdą stronę tworzymy w oparciu o nowoczesne standardy, zapewniając estetyczny wygląd i łatwą obsługę.',
     icon: Clock,
     features: [
-      'Realizacja w ciągu 7-14 dni',
+      'Realizacja w ciągu 5-10 dni',
       'Szybkie poprawki i zmiany',
       'Natychmiastowe wdrożenie'
     ]
@@ -76,7 +77,7 @@ const benefits = [
     description: 'Projekt strony jest dostosowany do Twoich potrzeb i oczekiwań – jeśli masz wizję, stworzymy ją dla Ciebie!',
     icon: Layout,
     features: [
-      'Konsultacje projektowe',
+      'Bezpłatna wycena i doradztwo',
       'Dostosowanie do branży',
       'Spersonalizowany design'
     ]
@@ -96,10 +97,19 @@ const benefits = [
 export default function ServicesPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     setIsVisible(true)
   }, [])
+
+  const handleSelectPlan = (serviceTitle: string, variant: { name: string; price: string }) => {
+    const params = new URLSearchParams({
+      package: `${serviceTitle} - ${variant.name}`,
+      price: variant.price
+    })
+    router.push(`/formularz?${params.toString()}`)
+  }
 
   return (
     <main className="pt-24 bg-gray-50">
@@ -235,9 +245,11 @@ export default function ServicesPage() {
                           </ul>
 
                           {/* Animated button */}
-                          <button className="w-full py-2.5 px-4 bg-white border-2 border-blue-600 text-blue-600 
-                            rounded-lg font-medium relative overflow-hidden group-hover/variant:text-white
-                            transition-colors duration-300">
+                          <button 
+                            onClick={() => handleSelectPlan(service.title, variant)}
+                            className="w-full py-2.5 px-4 bg-white border-2 border-blue-600 text-blue-600 
+                              rounded-lg font-medium relative overflow-hidden group-hover/variant:text-white
+                              transition-colors duration-300">
                             <span className="relative z-10">Wybierz plan</span>
                             <div className="absolute inset-0 bg-blue-600 -translate-x-full 
                               group-hover/variant:translate-x-0 transition-transform duration-300" />
@@ -269,7 +281,7 @@ export default function ServicesPage() {
               <div>
                 <div className="inline-flex items-center space-x-2 bg-blue-50 px-4 py-2 rounded-full text-sm mb-6">
                   <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
-                  <span className="text-blue-600 font-medium">Aktywne wsparcie 24/7</span>
+                  <span className="text-blue-600 font-medium">Aktywne wsparcie w godzinach pracy</span>
                 </div>
 
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4 group-hover/maintenance:text-blue-600 transition-colors">
@@ -331,7 +343,9 @@ export default function ServicesPage() {
                     </p>
                   </div>
 
-                  <button className="relative w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg overflow-hidden group/button">
+                  <button 
+                    onClick={() => handleSelectPlan('Administrowanie Stroną', { name: 'Miesięczna subskrypcja', price: '100' })}
+                    className="relative w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg overflow-hidden group/button">
                     <div className="absolute inset-0 bg-white opacity-0 group-hover/button:opacity-20 transition-opacity" />
                     <div className="relative flex items-center justify-center space-x-2">
                       <span className="font-medium group-hover/button:translate-x-1 transition-transform">

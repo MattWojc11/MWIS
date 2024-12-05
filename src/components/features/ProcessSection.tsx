@@ -16,7 +16,7 @@ const processes = [
   {
     number: '03',
     title: 'Optymalizacja',
-    description: 'Dbamy o szybkość działania i pozycjonowanie w wyszukiwarkach.'
+    description: 'Dbamy o szybkość działania i optymalizacje pod kątem SEO.'
   },
   {
     number: '04',

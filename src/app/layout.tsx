@@ -22,6 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl" className={`scroll-smooth ${inter.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="icon" type="image/x-icon" href="/images/velowebico.ico" />
+      </head>
       <body className="bg-[#0A0F1C]">
         <Header />
         <main className="min-h-screen">

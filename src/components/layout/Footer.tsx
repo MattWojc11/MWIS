@@ -21,7 +21,7 @@ export default function Footer() {
               <a href="#" className="hover:text-pink-500 transition-colors">
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="mailto:kontakt@veloweb.pl" className="hover:text-blue-400 transition-colors">
+              <a href="mailto:mateusz.wojcikk11@gmail.com" className="hover:text-blue-400 transition-colors">
                 <Mail className="h-6 w-6" />
               </a>
             </div>
@@ -53,7 +53,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Nasze Usługi</h4>
             <ul className="space-y-2">
-              <li>Landing Page</li>
+              <li>One-Page Website</li>
               <li>Strony z Podstronami</li>
               <li>Optymalizacja SEO</li>
               <li>Wsparcie Techniczne</li>
@@ -70,7 +70,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                kontakt@veloweb.pl
+                mateusz.wojcikk11@gmail.com
               </li>
               <li className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />

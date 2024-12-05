@@ -100,8 +100,8 @@ export default function Header() {
             transform ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
           `}>
             <p className="text-sm uppercase tracking-wider mb-2">Kontakt</p>
-            <a href="mailto:kontakt@veloweb.pl" className="text-white hover:text-blue-400 transition-colors">
-              kontakt@veloweb.pl
+            <a href="mailto:mateusz.wojcikk11@gmail.com" className="text-white hover:text-blue-400 transition-colors">
+            mateusz.wojcikk11@gmail.com
             </a>
           </div>
         </div>

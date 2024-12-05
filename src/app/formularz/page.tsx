@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import emailjs from '@emailjs/browser'
-import { Package, User, Mail, MessageSquare, Send } from 'lucide-react'
+import { Package, User, Mail, MessageSquare, Send, Phone, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 // Initialize EmailJS with environment variable
 if (typeof window !== 'undefined') {
@@ -20,6 +22,8 @@ function FormContent() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [lastSubmitTime, setLastSubmitTime] = useState<number>(0)
   const [cooldownRemaining, setCooldownRemaining] = useState<number>(0)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
   
   const [formData, setFormData] = useState({
     package: searchParams.get('package') || '',
@@ -27,6 +31,7 @@ function FormContent() {
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     message: ''
   })
 
@@ -46,6 +51,11 @@ function FormContent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!recaptchaValue) {
+      alert('Proszę potwierdzić, że nie jesteś robotem')
+      return
+    }
 
     // Sprawdź czy minął wymagany czas od ostatniego wysłania
     const now = Date.now()
@@ -68,6 +78,7 @@ function FormContent() {
         package_price: formData.price,
         from_name: `${formData.firstName} ${formData.lastName}`,
         from_email: formData.email,
+        phone: formData.phone,
         message: formData.message,
         subject: `Nowe zamówienie strony: ${formData.package}`,
         reply_to: formData.email,
@@ -75,7 +86,8 @@ function FormContent() {
         package_title: 'Szczegóły wybranego pakietu',
         contact_title: 'Dane kontaktowe klienta',
         message_title: 'Treść wiadomości od klienta',
-        footer_text: 'Wiadomość wysłana automatycznie z formularza zamówień na stronie VeloWeb.'
+        footer_text: 'Wiadomość wysłana automatycznie z formularza zamówień na stronie VeloWeb.',
+        'g-recaptcha-response': recaptchaValue
       }
 
       if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
@@ -98,14 +110,21 @@ function FormContent() {
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
         message: ''
       }))
+      setRecaptchaValue(null)
+      recaptchaRef.current?.reset()
     } catch (error) {
       console.error('Błąd wysyłania wiadomości:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value)
   }
 
   // Funkcja pomocnicza do formatowania pozostałego czasu
@@ -143,10 +162,20 @@ function FormContent() {
             <h1 className="text-4xl md:text-5xl font-serif mb-4">
               Formularz <span className="text-blue-400">zamówienia</span>
             </h1>
-            <p className="text-gray-400 max-w-xl mx-auto">
+            <p className="text-gray-400 max-w-xl mx-auto mb-8">
               Wypełnij poniższy formularz, aby rozpocząć współpracę. 
               Skontaktujemy się z Tobą w ciągu 24 godzin.
             </p>
+            
+            <Link 
+              href="/"
+              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm text-gray-400 hover:text-white
+                       bg-white/5 hover:bg-white/10 rounded-lg transition-all duration-300
+                       border border-white/10 hover:border-white/20 group"
+            >
+              <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300" />
+              <span>Powrót do strony głównej</span>
+            </Link>
           </div>
 
           {/* Wybrany pakiet - wyróżniona sekcja */}
@@ -235,6 +264,25 @@ function FormContent() {
                 />
               </div>
 
+              {/* Numer telefonu */}
+              <div className="group">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
+                  <Phone className="w-4 h-4" />
+                  Numer telefonu
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg text-white placeholder-gray-500 
+                           focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
+                           group-hover:border-blue-500/50"
+                  placeholder="+48 123 456 789"
+                />
+              </div>
+
               {/* Wiadomość */}
               <div className="group">
                 <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
@@ -252,6 +300,18 @@ function FormContent() {
                            group-hover:border-blue-500/50"
                   placeholder="Twoja wiadomość..."
                 />
+              </div>
+
+              {/* ReCAPTCHA */}
+              <div className="flex justify-center">
+                <div className="bg-white rounded-lg p-2">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                    onChange={handleRecaptchaChange}
+                    theme="light"
+                  />
+                </div>
               </div>
 
               {/* Status wiadomości */}
@@ -287,7 +347,7 @@ function FormContent() {
               {/* Przycisk wysyłania */}
               <button
                 type="submit"
-                disabled={isSubmitting || cooldownRemaining > 0}
+                disabled={isSubmitting || cooldownRemaining > 0 || !recaptchaValue}
                 className={`
                   w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl
                   text-white font-medium transition-all duration-300

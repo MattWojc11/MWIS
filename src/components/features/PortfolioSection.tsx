@@ -2,29 +2,23 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight, Globe, Smartphone } from 'lucide-react'
 import Link from 'next/link'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 
 const projects = [
   {
-    id: 1,
     title: 'Aplikacja Treningowa',
-    type: 'Aplikacje',
+    description: 'Kompleksowa aplikacja mobilna do planowania treningów i monitorowania postępów.',
     image: '/images/apk1.png',
-    tech: ['React Native', 'TypeScript', 'Firebase', 'Redux'],
-    description: 'Kompleksowa aplikacja mobilna do planowania treningów i monitorowania postępów. Intuicyjny interfejs pozwala na łatwe śledzenie aktywności fizycznej.',
-    icon: Smartphone,
-    link: '#'
+    link: '/portfolio',
+    category: 'Mobile App'
   },
   {
-    id: 2,
-    title: 'Strona Przychodni Lekarskiej',
-    type: 'Web Apps',
+    title: 'Strona Przychodni',
+    description: 'Profesjonalna strona internetowa przychodni medycznej z systemem rezerwacji wizyt.',
     image: '/images/doc1.png',
-    tech: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
-    description: 'Profesjonalna strona internetowa przychodni medycznej z systemem umawiania wizyt online i dostępem do dokumentacji medycznej.',
-    icon: Globe,
-    link: 'https://doctorsite-pearl.vercel.app'
+    link: '/portfolio',
+    category: 'Web App'
   }
 ]
 
@@ -55,108 +49,97 @@ export default function PortfolioSection() {
   }, [])
 
   return (
-    <section id="portfolio-section" className="py-24 bg-gray-900 relative overflow-hidden">
+    <section id="portfolio-section" className="py-24 relative overflow-hidden bg-[#0A0F1C]">
       {/* Tło */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#080808_1px,transparent_1px),linear-gradient(to_bottom,#080808_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-      
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1f2e_1px,transparent_1px),linear-gradient(to_bottom,#1a1f2e_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/50 via-transparent to-transparent" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Nagłówek */}
         <div className={`
-          text-center mb-16
+          max-w-3xl mx-auto text-center mb-16
           transition-all duration-700 delay-200
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
         `}>
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
+          <h2 className="text-5xl md:text-6xl font-serif text-white mb-6">
             Nasze <span className="text-blue-400">Realizacje</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Sprawdź przykłady naszych najnowszych projektów i przekonaj się o jakości naszych rozwiązań
+          <p className="text-xl text-gray-400">
+            Projekty, które definiują naszą jakość i profesjonalizm
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Projekty */}
+        <div className="grid md:grid-cols-2 gap-12">
           {projects.map((project, index) => (
-            <div
-              key={project.id}
+            <Link
+              href={project.link}
+              key={project.title}
               className={`
-                group relative bg-gray-800/50 rounded-2xl overflow-hidden backdrop-blur-sm
+                group relative
                 transition-all duration-700 delay-[${(index + 1) * 100}ms]
                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
               `}
-              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              {/* Tło projektu */}
-              <div className="absolute inset-0">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
-              </div>
-
-              {/* Zawartość */}
-              <div className="relative p-8 h-full flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-blue-500/20 rounded-xl">
-                    <project.icon className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <div className="flex gap-2">
-                    {project.tech.map((tech) => (
-                      <span 
-                        key={tech}
-                        className="px-3 py-1 text-xs font-medium bg-gray-800/80 text-gray-300 rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+              {/* Karta projektu */}
+              <div className="relative h-full">
+                {/* Obrazek */}
+                <div className="relative h-[300px] rounded-2xl overflow-hidden mb-6">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C] to-transparent opacity-80" />
+                  
+                  {/* Kategoria */}
+                  <div className="absolute top-6 left-6">
+                    <span className="px-4 py-2 bg-blue-500/20 backdrop-blur-sm text-blue-300 rounded-full text-sm font-medium">
+                      {project.category}
+                    </span>
                   </div>
                 </div>
 
-                <div className="mt-auto">
-                  <p className="text-blue-400 text-sm font-medium mb-2">
-                    {project.type}
-                  </p>
-                  <h3 className="text-2xl font-bold text-white mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 mb-6">
+                {/* Treść */}
+                <div>
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <div className={`
+                      w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center
+                      transform transition-all duration-300
+                      ${hoveredProject === index ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
+                    `}>
+                      <ArrowRight className="w-5 h-5 text-blue-400" />
+                    </div>
+                  </div>
+                  <p className="text-gray-400 text-lg leading-relaxed">
                     {project.description}
                   </p>
-
-                  <a
-                    href={project.link}
-                    className={`
-                      inline-flex items-center text-sm font-medium
-                      transition-all duration-300
-                      ${hoveredProject === project.id ? 'text-blue-400' : 'text-gray-400'}
-                    `}
-                  >
-                    Zobacz szczegóły
-                    <ArrowRight className={`
-                      ml-2 w-4 h-4 transition-transform duration-300
-                      ${hoveredProject === project.id ? 'translate-x-2' : ''}
-                    `} />
-                  </a>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         {/* Przycisk "Zobacz więcej" */}
-        <div className="mt-16 flex justify-center">
-          <Link 
-            href="/portfolio" 
-            className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-full overflow-hidden"
+        <div className="flex justify-center mt-16">
+          <Link
+            href="/portfolio"
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-600 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-            <span className="relative text-white font-medium">
-              Zobacz wszystkie nasze projekty
-            </span>
-            <div className="relative w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
-              <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-600 translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300" />
+            <div className="relative flex items-center gap-3">
+              <span className="text-white font-medium">
+                Zobacz pełne portfolio
+              </span>
+              <ExternalLink className="w-4 h-4 text-white transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </div>
           </Link>
         </div>

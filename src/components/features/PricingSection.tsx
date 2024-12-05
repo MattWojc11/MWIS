@@ -48,7 +48,6 @@ const plans = [
           'Projekt z gotowego portfolio',
           'Responsywny design',
           'Rozszerzona optymalizacja SEO',
-          'System zarządzania treścią',
           'Hosting i domena (osobno płatne)'
         ]
       },
@@ -61,7 +60,6 @@ const plans = [
           'Indywidualny projekt',
           'Responsywny design',
           'Rozszerzona optymalizacja SEO',
-          'System zarządzania treścią',
           'Hosting i domena (osobno płatne)'
         ]
       }

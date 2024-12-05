@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Users, Target, Award, Clock, ArrowRight, Code, Laptop, Zap, Shield, Heart, Star } from 'lucide-react'
+import { Users, Target, Award, Clock, ArrowRight, Heart, Shield } from 'lucide-react'
 
 const achievements = [
   {
     icon: Users,
-    number: '200+',
+    number: '25+',
     label: 'Zadowolonych Klientów',
     description: 'Zaufali nam przedsiębiorcy z różnych branż'
   },
   {
     icon: Target,
-    number: '95%',
+    number: '100%',
     label: 'Skuteczność',
     description: 'Projektów zakończonych sukcesem'
   },
@@ -31,15 +31,6 @@ const achievements = [
   }
 ]
 
-const technologies = [
-  { name: 'Next.js', icon: Code },
-  { name: 'React', icon: Laptop },
-  { name: 'TypeScript', icon: Code },
-  { name: 'Tailwind CSS', icon: Zap },
-  { name: 'Node.js', icon: Shield },
-  { name: 'MongoDB', icon: Star }
-]
-
 const whyUs = [
   {
     title: 'Indywidualne podejście',
@@ -49,7 +40,7 @@ const whyUs = [
   {
     title: 'Nowoczesne technologie',
     description: 'Wykorzystujemy najnowsze technologie i frameworki, aby zapewnić najwyższą jakość i wydajność Twojej strony.',
-    icon: Code
+    icon: Shield
   },
   {
     title: 'Wsparcie po wdrożeniu',
@@ -159,11 +150,11 @@ export default function AboutPage() {
                   stron internetowych przekłada się na zadowolenie klientów.
                 </p>
                 <p>
-                  Specjalizuję się w technologiach frontendowych, szczególnie w React i Next.js, 
+                  Specjalizuję się w technologiach frontendowych , 
                   co pozwala mi tworzyć wydajne i responsywne aplikacje webowe. Każdy projekt 
                   traktuję jako okazję do dostarczenia wartości dla klienta.
-                </p>
-                <p>
+                
+                
                   Moim celem jest nie tylko tworzenie pięknych stron, ale przede wszystkim 
                   dostarczanie rozwiązań, które realnie wspierają rozwój biznesu moich klientów.
                 </p>
@@ -182,36 +173,6 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Technologie */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-serif text-center text-gray-900 mb-6">
-            Technologie, które <span className="text-blue-600">wykorzystuję</span>
-          </h2>
-          <p className="text-center text-gray-600 max-w-3xl mx-auto mb-16">
-            Pracuję z najnowszymi technologiami webowymi, które pozwalają tworzyć 
-            szybkie, bezpieczne i skalowalne aplikacje internetowe.
-          </p>
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {technologies.map((tech, index) => (
-              <div
-                key={tech.name}
-                className={`
-                  group p-6 bg-gray-50 rounded-xl text-center hover:bg-blue-50 transition-all duration-300
-                  ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-                `}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4 group-hover:bg-blue-200 transition-colors">
-                  <tech.icon className="w-6 h-6 text-blue-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900">{tech.name}</h3>
-              </div>
-            ))}
           </div>
         </div>
       </section>

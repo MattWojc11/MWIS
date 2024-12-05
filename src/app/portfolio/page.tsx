@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ExternalLink, Code, X } from 'lucide-react'
 
-const categories = ['Wszystkie', 'Web Apps', 'E-commerce', 'Landing Pages', 'Aplikacje']
+const categories = ['Wszystkie', 'One-Page Websites', 'Strony Internetowe', 'Aplikacje']
 
 const projectImages = [
   '/images/apk1.png',
@@ -21,6 +21,23 @@ const documentationImages = [
   '/images/doc4.png'
 ]
 
+const beautyImages = [
+  '/images/beautymain.png',
+  '/images/beauty1.png',
+  '/images/beauty2.png',
+  '/images/beauty3.png',
+  
+  '/images/beauty5.png'
+]
+
+const biuroImages = [
+  '/images/biuroarch1.png',
+  '/images/biuroarch2.png',
+  '/images/biuroarch3.png',
+  '/images/biuroarch4.png',
+  '/images/biuroarch5.png'
+]
+
 const projects = [
   {
     id: 1,
@@ -29,18 +46,12 @@ const projects = [
     image: '/images/apk1.png',
     gallery: projectImages,
     description: 'Kompleksowa aplikacja mobilna do planowania treningów i monitorowania postępów. Intuicyjny interfejs pozwala na łatwe śledzenie aktywności fizycznej.',
-    technologies: ['React Native', 'TypeScript', 'Firebase', 'Redux'],
     features: [
       'Plany treningowe',
       'Śledzenie postępów',
       'Biblioteka ćwiczeń',
       'Statystyki treningowe'
     ],
-    stats: {
-      users: '1k+',
-      workouts: '50k+',
-      rating: '4.8/5'
-    },
     demoUrl: '#',
     githubUrl: '#',
     liveSite: true
@@ -48,23 +59,51 @@ const projects = [
   {
     id: 2,
     title: 'Strona Przychodni Lekarskiej',
-    category: 'Web Apps',
+    category: 'Strony Internetowe',
     image: '/images/doc1.png',
     gallery: documentationImages,
     description: 'Profesjonalna strona internetowa przychodni medycznej z systemem umawiania wizyt online i dostępem do dokumentacji medycznej.',
-    technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
     features: [
       'System rezerwacji wizyt',
       'Panel pacjenta',
       'Historia leczenia',
       'Dokumentacja medyczna'
     ],
-    stats: {
-      pacjenci: '2k+',
-      wizyty: '500+',
-      lekarze: '20+'
-    },
     demoUrl: 'https://doctorsite-pearl.vercel.app',
+    githubUrl: '#',
+    liveSite: true
+  },
+  {
+    id: 3,
+    title: 'Beauty Salon',
+    category: 'One-Page Websites',
+    image: '/images/beautymain.png',
+    gallery: beautyImages,
+    description: 'Elegancka strona typu one-page dla salonu kosmetycznego, prezentująca ofertę zabiegów i umożliwiająca łatwe umawianie wizyt.',
+    features: [
+      'Prezentacja zabiegów',
+      'Formularz kontaktowy',
+      'Galeria realizacji',
+      'Cennik usług'
+    ],
+    demoUrl: 'https://beautylab.vercel.app',
+    githubUrl: '#',
+    liveSite: true
+  },
+  {
+    id: 4,
+    title: 'Biuro Architektoniczne',
+    category: 'Strony Internetowe',
+    image: '/images/biuroarch1.png',
+    gallery: biuroImages,
+    description: 'Profesjonalna strona internetowa dla biura architektonicznego, prezentująca portfolio projektów i usługi projektowe.',
+    features: [
+      'Portfolio projektów',
+      'Prezentacja usług',
+      'Interaktywne wizualizacje',
+      'Formularz kontaktowy'
+    ],
+    demoUrl: 'https://biuroprojektowe.vercel.app',
     githubUrl: '#',
     liveSite: true
   }
@@ -173,16 +212,17 @@ export default function PortfolioPage() {
 
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="bg-white/5 p-4 rounded-lg backdrop-blur-sm">
-                  <h4 className="font-medium mb-2">Widoczność w sieci</h4>
+                  <h4 className="font-medium mb-2">Nowoczesny Design</h4>
                   <p className="text-sm text-gray-400">
-                    Stawiaj na jak najlepszą widoczność w sieci! Podstawa to profesjonalna strona 
-                    i optymalizacja pod względem SEO.
+                    Tworzę strony z wykorzystaniem najnowszych trendów w projektowaniu, 
+                    zapewniając estetyczny i profesjonalny wygląd.
                   </p>
                 </div>
                 <div className="bg-white/5 p-4 rounded-lg backdrop-blur-sm">
-                  <h4 className="font-medium mb-2">Konwersja</h4>
+                  <h4 className="font-medium mb-2">Responsywność</h4>
                   <p className="text-sm text-gray-400">
-                    Zadbamy, aby Twoja witryna miała dobrą konwersję pod kampanie reklamowe.
+                    Wszystkie projekty są w pełni responsywne, działają idealnie 
+                    na każdym urządzeniu i przeglądarce.
                   </p>
                 </div>
               </div>
@@ -295,38 +335,14 @@ export default function PortfolioPage() {
                     </p>
                   </div>
 
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech) => (
-                      <span 
-                        key={tech}
-                        className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
                   {/* Features */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="grid grid-cols-2 gap-4">
                     {project.features.map((feature) => (
                       <div key={feature} className="flex items-center text-sm text-gray-400">
                         <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2" />
                         {feature}
                       </div>
                     ))}
-                  </div>
-
-                  {/* Stats */}
-                  <div className="pt-6 border-t border-white/10">
-                    <div className="grid grid-cols-3 gap-4">
-                      {Object.entries(project.stats).map(([key, value]) => (
-                        <div key={key} className="text-center">
-                          <div className="text-lg font-bold text-blue-400">{value}</div>
-                          <div className="text-xs text-gray-400 capitalize">{key}</div>
-                        </div>
-                      ))}
-                    </div>
                   </div>
 
                   {/* Gallery */}
@@ -349,14 +365,17 @@ export default function PortfolioPage() {
                             alt={`${project.title} - główne zdjęcie`}
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            onError={() => {
+                              console.error('Error loading image:', project.gallery[0]);
+                            }}
                           />
                           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                         {/* Mniejsze zdjęcia */}
                         <div className="col-span-6 md:col-span-2 grid grid-cols-2 gap-4">
-                          {project.gallery.slice(1, 5).map((img, idx) => (
+                          {project.gallery.slice(1).map((img, idx) => (
                             <div 
-                              key={idx}
+                              key={img}
                               className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
                               onClick={(e) => {
                                 e.preventDefault();
@@ -370,6 +389,9 @@ export default function PortfolioPage() {
                                 alt={`${project.title} - zdjęcie ${idx + 2}`}
                                 fill
                                 className="object-cover transition-transform duration-300 group-hover:scale-110"
+                                onError={() => {
+                                  console.error('Error loading image:', img);
+                                }}
                               />
                               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
@@ -399,14 +421,35 @@ export default function PortfolioPage() {
               <X className="w-6 h-6 text-white" />
             </button>
 
-            {/* Main image */}
-            <div className="relative aspect-video mb-8">
-              <Image
-                src={activeProject.gallery[currentImageIndex]}
-                alt={`${activeProject.title} - zdjęcie ${currentImageIndex + 1}`}
-                fill
-                className="object-contain"
-              />
+            {/* Main image container */}
+            <div className="relative">
+              {/* Main image */}
+              <div className="relative aspect-video mb-8">
+                <Image
+                  src={activeProject.gallery[currentImageIndex]}
+                  alt={`${activeProject.title} - zdjęcie ${currentImageIndex + 1}`}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+
+              {/* Navigation arrows - now outside the image */}
+              <button
+                onClick={prevImage}
+                className="absolute -left-24 top-1/2 -translate-y-1/2 p-4 bg-black/90 hover:bg-black rounded-xl hover:scale-110 transition-all duration-300 border border-white/20 shadow-xl"
+              >
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute -right-24 top-1/2 -translate-y-1/2 p-4 bg-black/90 hover:bg-black rounded-xl hover:scale-110 transition-all duration-300 border border-white/20 shadow-xl"
+              >
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
 
             {/* Thumbnails */}
@@ -430,24 +473,6 @@ export default function PortfolioPage() {
                 </button>
               ))}
             </div>
-
-            {/* Navigation arrows */}
-            <button
-              onClick={prevImage}
-              className="absolute left-8 top-1/2 -translate-y-1/2 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
-            >
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-8 top-1/2 -translate-y-1/2 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
-            >
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
           </div>
         </div>
       )}

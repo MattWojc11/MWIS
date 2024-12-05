@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Mail, Phone, Send, Clock } from 'lucide-react'
+import { useEffect, useState, useRef } from 'react'
+import { Mail, Phone, Send, Clock, MapPin } from 'lucide-react'
 import emailjs from '@emailjs/browser'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 const contactInfo = [
   {
@@ -24,6 +25,9 @@ const workingHours = [
   { days: 'Niedziela', hours: 'Zamknięte' }
 ]
 
+// Stała dla minimalnego odstępu między wysyłkami (50 sekund)
+const MIN_SUBMISSION_INTERVAL = 50000
+
 export default function ContactPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [formData, setFormData] = useState({
@@ -34,6 +38,11 @@ export default function ContactPage() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [lastSubmitTime, setLastSubmitTime] = useState<number>(0)
+  const [cooldownRemaining, setCooldownRemaining] = useState<number>(0)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
 
   useEffect(() => {
     setIsVisible(true)
@@ -41,25 +50,62 @@ export default function ContactPage() {
 
   useEffect(() => {
     emailjs.init({
-      publicKey: "XanjWpTw6am6zERZK",
+      publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
       blockHeadless: false,
     })
   }, [])
 
+  // Efekt dla odliczania cooldownu
+  useEffect(() => {
+    if (cooldownRemaining > 0) {
+      const timer = setInterval(() => {
+        setCooldownRemaining(prev => Math.max(0, prev - 1000))
+      }, 1000)
+      return () => clearInterval(timer)
+    }
+  }, [cooldownRemaining])
+
+  // Funkcja pomocnicza do formatowania pozostałego czasu
+  const formatCooldownTime = (ms: number): string => {
+    const seconds = Math.ceil(ms / 1000)
+    return `${seconds} sekund`
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!recaptchaValue) {
+      alert('Proszę potwierdzić, że nie jesteś robotem')
+      return
+    }
+
+    // Sprawdź czy minął wymagany czas od ostatniego wysłania
+    const now = Date.now()
+    const timeSinceLastSubmit = now - lastSubmitTime
+    
+    if (timeSinceLastSubmit < MIN_SUBMISSION_INTERVAL) {
+      const remainingTime = MIN_SUBMISSION_INTERVAL - timeSinceLastSubmit
+      setCooldownRemaining(remainingTime)
+      setSubmitStatus('error')
+      return
+    }
+    
     setIsSubmitting(true)
+    setSubmitStatus('idle')
     
     try {
       const result = await emailjs.send(
-        'service_07sz71q',
-        'template_9jarsnh',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID!,
         {
           from_name: formData.name,
           from_email: formData.email,
+          phone: formData.phone || 'Nie podano',
           subject: formData.subject,
           message: formData.message,
-          to_email: 'mateusz.wojcikk11@gmail.com'
+          to_email: 'mateusz.wojcikk11@gmail.com',
+          reply_to: formData.email,
+          'g-recaptcha-response': recaptchaValue
         }
       )
 
@@ -71,8 +117,11 @@ export default function ContactPage() {
           subject: '',
           message: ''
         })
-        
-        alert('Wiadomość została wysłana!')
+        setRecaptchaValue(null)
+        recaptchaRef.current?.reset()
+        setLastSubmitTime(now)
+        setCooldownRemaining(MIN_SUBMISSION_INTERVAL)
+        setSubmitStatus('success')
       } else {
         throw new Error('Błąd wysyłania wiadomości')
       }
@@ -82,10 +131,14 @@ export default function ContactPage() {
       } else {
         console.error('Nieznany błąd:', error)
       }
-      alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.')
+      setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value)
   }
 
   return (
@@ -213,9 +266,9 @@ export default function ContactPage() {
                       id="name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
+                      className="peer w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-900
                         focus:ring-0 focus:bg-white transition-all placeholder-transparent
-                        group-hover:bg-gray-100"
+                        group-hover:bg-gray-200"
                       placeholder="Imię i nazwisko"
                       required
                     />
@@ -237,9 +290,9 @@ export default function ContactPage() {
                       id="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
+                      className="peer w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-900
                         focus:ring-0 focus:bg-white transition-all placeholder-transparent
-                        group-hover:bg-gray-100"
+                        group-hover:bg-gray-200"
                       placeholder="Email"
                       required
                     />
@@ -258,13 +311,37 @@ export default function ContactPage() {
 
                 <div className="relative group">
                   <input
+                    type="tel"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="peer w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-900
+                      focus:ring-0 focus:bg-white transition-all placeholder-transparent
+                      group-hover:bg-gray-200"
+                    placeholder="Numer telefonu"
+                    required
+                  />
+                  <label 
+                    htmlFor="phone"
+                    className="absolute left-4 -top-2.5 text-sm font-medium text-gray-700 bg-white px-1
+                      transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 
+                      peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600"
+                  >
+                    Numer telefonu
+                  </label>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 
+                    transition-all duration-300 group-hover:w-full peer-focus:w-full" />
+                </div>
+
+                <div className="relative group">
+                  <input
                     type="text"
                     id="subject"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
+                    className="peer w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-900
                       focus:ring-0 focus:bg-white transition-all placeholder-transparent
-                      group-hover:bg-gray-100"
+                      group-hover:bg-gray-200"
                     placeholder="Temat"
                     required
                   />
@@ -286,9 +363,9 @@ export default function ContactPage() {
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="peer w-full px-4 py-3 bg-gray-50 border-0 rounded-lg text-gray-900
+                    className="peer w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-900
                       focus:ring-0 focus:bg-white transition-all placeholder-transparent resize-none
-                      group-hover:bg-gray-100"
+                      group-hover:bg-gray-200"
                     placeholder="Wiadomość"
                     required
                   />
@@ -304,9 +381,51 @@ export default function ContactPage() {
                     transition-all duration-300 group-hover:w-full peer-focus:w-full" />
                 </div>
 
+                {/* ReCAPTCHA */}
+                <div className="flex justify-center mb-6">
+                  <div className="bg-white rounded-lg p-2">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                      onChange={handleRecaptchaChange}
+                      theme="light"
+                    />
+                  </div>
+                </div>
+
+                {/* Status wiadomości */}
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 animate-fade-in">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                      <p>Wiadomość została wysłana pomyślnie!</p>
+                    </div>
+                    {cooldownRemaining > 0 && (
+                      <p className="mt-2 text-sm">
+                        Następną wiadomość będzie można wysłać za {formatCooldownTime(cooldownRemaining)}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {submitStatus === 'error' && cooldownRemaining > 0 ? (
+                  <div className="p-4 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 animate-fade-in">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                      <p>Proszę poczekać {formatCooldownTime(cooldownRemaining)} przed wysłaniem kolejnej wiadomości.</p>
+                    </div>
+                  </div>
+                ) : submitStatus === 'error' && (
+                  <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 animate-fade-in">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
+                      <p>Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.</p>
+                    </div>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || cooldownRemaining > 0 || !recaptchaValue}
                   className={`
                     relative w-full py-4 bg-blue-600 text-white rounded-lg font-medium
                     overflow-hidden group transition-all duration-300
@@ -316,7 +435,9 @@ export default function ContactPage() {
                   <div className="absolute inset-0 w-0 bg-white transition-all duration-300 ease-out group-hover:w-full opacity-10" />
                   <div className="relative flex items-center justify-center space-x-2">
                     <span className="transform group-hover:translate-x-1 transition-transform duration-300">
-                      {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
+                      {isSubmitting ? 'Wysyłanie...' : 
+                       cooldownRemaining > 0 ? `Poczekaj ${formatCooldownTime(cooldownRemaining)}` : 
+                       'Wyślij wiadomość'}
                     </span>
                     <Send className={`
                       w-5 h-5 transform transition-all duration-300
@@ -340,7 +461,7 @@ export default function ContactPage() {
           `}>
             <div className="relative h-[500px]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2493.2075300765153!2d16.078719!3d51.663742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f5f3b8e8b8b8b%3A0x2e8b8b8b8b8b8b8b!2sG%C5%82og%C3%B3w!5e0!3m2!1spl!2spl!4v1701101001001!5m2!1spl!2spl"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2493.1043656893166!2d16.07519937726831!3d51.66575397281701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc241b0d6e3b5%3A0x5cf49a7ebad3c1da!2zSsSZZHJ6ZWphIGkgSmFuYSDFm25pYWRlY2tpY2ggMTgsIDY3LTIwMCBHxYJvZ8Ozdw!5e0!3m2!1spl!2spl!4v1701726583744!5m2!1spl!2spl"
                 width="100%"
                 height="100%"
                 style={{ border: 0, position: 'absolute', inset: 0 }}
@@ -351,9 +472,10 @@ export default function ContactPage() {
               ></iframe>
             </div>
             <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg">
-              <p className="text-gray-900 font-medium text-center">
-                Znajdziesz nas w centrum Głogowa
-              </p>
+              <div className="flex items-center space-x-3">
+                <MapPin className="w-5 h-5 text-blue-500" />
+                <span>Głogów, Jędrzeja i Jana Śniadeckich 18</span>
+              </div>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 const services = [
   {
     icon: Globe,
-    title: 'Landing Page',
+    title: 'One-Page Website',
     description: 'Minimalistyczne i przyciągające uwagę strony jednostronicowe, idealne dla prostej prezentacji.'
   },
   {
