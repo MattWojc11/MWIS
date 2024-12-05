@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 const services = [
   {
-    title: 'Landing Page',
+    title: 'One-Page Website',
     variants: [
       {
         name: 'Z gotowego portfolio',

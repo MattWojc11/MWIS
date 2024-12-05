@@ -51,7 +51,7 @@ export default function Hero() {
             ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
           `}>
             <div>
-              <div className="text-6xl font-bold mb-2">95%</div>
+              <div className="text-6xl font-bold mb-2">100%</div>
               <p className="text-sm text-gray-400 uppercase tracking-wider">
                 Zadowolonych klientów
               </p>

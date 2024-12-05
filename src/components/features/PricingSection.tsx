@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const plans = [
   {
-    name: 'Landing Page',
+    name: 'One-Page Website',
     icon: Star,
     variants: [
       {

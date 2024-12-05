@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
+import { Linkedin, Instagram, Mail, MapPin, Phone } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -15,10 +15,10 @@ export default function Footer() {
               Tworzymy profesjonalne strony internetowe, które pomagają firmom zaistnieć w sieci.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-blue-500 transition-colors">
-                <Facebook className="h-6 w-6" />
+              <a href="https://www.linkedin.com/company/velowebpl" className="hover:text-blue-500 transition-colors">
+                <Linkedin className="h-6 w-6" />
               </a>
-              <a href="#" className="hover:text-pink-500 transition-colors">
+              <a href="https://www.instagram.com/velowebpl/" className="hover:text-pink-500 transition-colors">
                 <Instagram className="h-6 w-6" />
               </a>
               <a href="mailto:mateusz.wojcikk11@gmail.com" className="hover:text-blue-400 transition-colors">
@@ -66,7 +66,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
-                +48 123 456 789
+                +48 512 847 175
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
