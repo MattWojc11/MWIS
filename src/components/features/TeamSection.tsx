@@ -12,7 +12,7 @@ const team = [
     bio: 'Ekspert w dziedzinie tworzenia stron internetowych z 4-letnim doświadczeniem.',
     specialties: ['Next.js', 'React', 'Zarządzanie Projektami'],
     contact: {
-      email: 'mateusz.wojcikk11@gmail.com',
+      email: 'veloweb.contact@gmail.com',
       phone: '+48 512 847 175'
     }
   }

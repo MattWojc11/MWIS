@@ -21,7 +21,7 @@ export default function Footer() {
               <a href="https://www.instagram.com/velowebpl/" className="hover:text-pink-500 transition-colors">
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="mailto:mateusz.wojcikk11@gmail.com" className="hover:text-blue-400 transition-colors">
+              <a href="mailto:veloweb.contact@gmail.com" className="hover:text-blue-400 transition-colors">
                 <Mail className="h-6 w-6" />
               </a>
             </div>
@@ -70,7 +70,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                mateusz.wojcikk11@gmail.com
+                veloweb.contact@gmail.com
               </li>
               <li className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />

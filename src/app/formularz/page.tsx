@@ -73,7 +73,7 @@ function FormContent() {
 
     try {
       const templateParams = {
-        to_email: 'mateusz.wojcikk11@gmail.com',
+        to_email: 'veloweb.contact@gmail.com',
         package_name: formData.package,
         package_price: formData.price,
         from_name: `${formData.firstName} ${formData.lastName}`,

@@ -9,13 +9,13 @@ const contactInfo = [
   {
     title: 'Kontakt',
     description: 'Skontaktuj się z nami w sprawie Twojego projektu',
-    email: 'mateusz.wojcikk11@gmail.com',
+    email: 'veloweb.contact@gmail.com',
     phone: '+48 512 847 175'
   },
   {
     title: 'Wsparcie techniczne',
     description: 'Pomożemy Ci rozwiązać każdy problem techniczny',
-    email: 'mateusz.wojcikk11@gmail.com'
+    email: 'veloweb.contact@gmail.com'
   }
 ]
 
@@ -103,7 +103,7 @@ export default function ContactPage() {
           phone: formData.phone || 'Nie podano',
           subject: formData.subject,
           message: formData.message,
-          to_email: 'mateusz.wojcikk11@gmail.com',
+          to_email: 'veloweb.contact@gmail.com',
           reply_to: formData.email,
           'g-recaptcha-response': recaptchaValue
         }
