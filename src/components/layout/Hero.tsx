@@ -10,23 +10,23 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="min-h-screen bg-[#0A0F1C] text-white overflow-hidden">
+    <section className="min-h-[100svh] bg-[#0A0F1C] text-white overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent"></div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-40">
         <div className="relative">
           <div className={`
-            inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm mb-8
+            inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm sm:text-base mb-8 sm:mb-10
             transition-all duration-700 delay-300
             ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
           `}>
-            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-green-400 rounded-full"></span>
             <span>Głogów, PL</span>
           </div>
 
-          <div className="overflow-hidden mb-8">
+          <div className="overflow-hidden mb-8 sm:mb-10">
             <h1 className={`
-              text-6xl md:text-8xl font-serif
+              text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif leading-[1.1]
               transition-all duration-700 delay-500
               ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}
             `}>
@@ -37,7 +37,7 @@ export default function Hero() {
           </div>
 
           <p className={`
-            text-lg text-gray-300 max-w-2xl mb-24
+            text-lg sm:text-xl text-gray-300 max-w-2xl sm:max-w-3xl mb-10 sm:mb-14
             transition-all duration-700 delay-700
             ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
           `}>
@@ -46,25 +46,25 @@ export default function Hero() {
           </p>
 
           <div className={`
-            grid grid-cols-3 gap-8 max-w-3xl
+            grid grid-cols-3 gap-4 sm:gap-10 max-w-lg sm:max-w-3xl mx-auto sm:mx-0
             transition-all duration-700 delay-1000
             ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
           `}>
-            <div>
-              <div className="text-6xl font-bold mb-2">100%</div>
-              <p className="text-sm text-gray-400 uppercase tracking-wider">
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-3">100%</div>
+              <p className="text-xs sm:text-base text-gray-400 uppercase tracking-wider">
                 Zadowolonych klientów
               </p>
             </div>
-            <div>
-              <div className="text-6xl font-bold mb-2">25+</div>
-              <p className="text-sm text-gray-400 uppercase tracking-wider">
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-3">25+</div>
+              <p className="text-xs sm:text-base text-gray-400 uppercase tracking-wider">
                 Zrealizowanych projektów
               </p>
             </div>
-            <div>
-              <div className="text-6xl font-bold mb-2">5+</div>
-              <p className="text-sm text-gray-400 uppercase tracking-wider">
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-3">5+</div>
+              <p className="text-xs sm:text-base text-gray-400 uppercase tracking-wider">
                 Stron pod opieką
               </p>
             </div>
