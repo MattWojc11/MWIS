@@ -39,7 +39,7 @@ export default function Header() {
         fixed top-0 w-full z-50 transition-all duration-300
         ${scrolled || isLightPage ? 'bg-[#0A0F1C]/95 backdrop-blur-sm py-2' : 'py-4'}
       `}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex justify-between items-center relative z-50">
             <Link href="/" className="text-2xl font-bold text-white">
               VeloWeb
@@ -65,7 +65,7 @@ export default function Header() {
         transition-all duration-500 ease-in-out
         ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
       `}>
-        <div className="h-screen flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-screen flex flex-col justify-center max-w-screen-2xl mx-auto px-4 sm:px-8 lg:px-16">
           <nav className="space-y-12">
             {[
               { href: '/', label: 'Strona główna' },
