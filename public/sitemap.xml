@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+        http://www.google.com/schemas/sitemap-image/1.1
+        http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+  <url>
+    <loc>https://veloweb.pl</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://veloweb.pl/images/og-image.jpg</image:loc>
+      <image:title>VeloWeb - Profesjonalne Strony Internetowe w Głogowie</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://veloweb.pl/uslugi</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://veloweb.pl/images/services.jpg</image:loc>
+      <image:title>Usługi Tworzenia Stron Internetowych - VeloWeb</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://veloweb.pl/portfolio</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://veloweb.pl/images/portfolio.jpg</image:loc>
+      <image:title>Portfolio Realizacji - VeloWeb</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://veloweb.pl/o-nas</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://veloweb.pl/images/about.jpg</image:loc>
+      <image:title>O Nas - VeloWeb</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://veloweb.pl/kontakt</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://veloweb.pl/formularz</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset> 
