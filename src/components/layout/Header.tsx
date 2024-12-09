@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { trackNavigation, trackContactClick } from '@/utils/analytics'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -33,6 +34,11 @@ export default function Header() {
     }
   }, [isMenuOpen])
 
+  const handleNavigation = (destination: string) => {
+    trackNavigation(destination)
+    setIsMenuOpen(false)
+  }
+
   return (
     <>
       <header className={`
@@ -41,7 +47,11 @@ export default function Header() {
       `}>
         <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex justify-between items-center relative z-50">
-            <Link href="/" className="text-2xl font-bold text-white">
+            <Link 
+              href="/" 
+              className="text-2xl font-bold text-white"
+              onClick={() => handleNavigation('home')}
+            >
               VeloWeb
             </Link>
 
@@ -83,7 +93,7 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => handleNavigation(link.label.toLowerCase())}
                   className={`
                     block text-5xl font-serif text-white hover:text-blue-400 transition-all duration-300
                     transform ${isMenuOpen ? 'translate-y-0' : 'translate-y-full'}
@@ -100,8 +110,12 @@ export default function Header() {
             transform ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
           `}>
             <p className="text-sm uppercase tracking-wider mb-2">Kontakt</p>
-            <a href="mailto:veloweb.contact@gmail.com" className="text-white hover:text-blue-400 transition-colors">
-            veloweb.contact@gmail.com
+            <a 
+              href="mailto:veloweb.contact@gmail.com" 
+              className="text-white hover:text-blue-400 transition-colors"
+              onClick={() => trackContactClick('email')}
+            >
+              veloweb.contact@gmail.com
             </a>
           </div>
         </div>

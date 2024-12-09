@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-inter: var(--font-inter);
+  --font-playfair: var(--font-playfair);
+  --font-cinzel: var(--font-cinzel);
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

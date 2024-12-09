@@ -2,6 +2,7 @@
 
 import { Globe, Rocket, Clock, Shield, LineChart, Cog } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { trackServiceClick } from '@/utils/analytics'
 
 const services = [
   {
@@ -61,6 +62,10 @@ export default function ServiceGrid() {
     }
   }, [])
 
+  const handleServiceClick = (serviceName: string) => {
+    trackServiceClick(serviceName)
+  }
+
   return (
     <section id="services-section" className="py-32 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,10 +89,11 @@ export default function ServiceGrid() {
             <div
               key={service.title}
               className={`
-                group relative
+                group relative cursor-pointer
                 transition-all duration-700 delay-[${(index + 1) * 100}ms]
                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
               `}
+              onClick={() => handleServiceClick(service.title)}
             >
               <div className="relative p-[1px] rounded-2xl bg-gradient-to-br from-blue-500 via-blue-400 to-blue-300">
                 <div className="relative bg-white p-8 rounded-xl group-hover:bg-blue-50/80 transition-all duration-300">
