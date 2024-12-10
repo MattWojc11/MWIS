@@ -45,24 +45,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pl_PL',
     url: 'https://veloweb.pl',
-    title: 'VeloWeb - Profesjonalne Tworzenie Stron Internetowych w Głogowie',
+    title: 'VeloWeb - Profesjonalne Tworzenie Stron Internetowych',
     description: 'Tworzymy nowoczesne strony internetowe dla firm w Głogowie i okolicach. Responsywny design, optymalizacja SEO i niezawodne rozwiązania.',
     siteName: 'VeloWeb',
     images: [
       {
-        url: '/images/ogg.png',
+        url: 'https://veloweb.pl/images/ogg.png',
         width: 1200,
         height: 630,
-        alt: 'VeloWeb - Profesjonalne Strony Internetowe w Głogowie',
-        type: 'image/jpeg',
+        alt: 'VeloWeb - Profesjonalne Strony Internetowe',
+        type: 'image/png',
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'VeloWeb - Profesjonalne Tworzenie Stron Internetowych w Głogowie',
+    title: 'VeloWeb - Profesjonalne Tworzenie Stron Internetowych',
     description: 'Tworzymy nowoczesne strony internetowe dla firm w Głogowie i okolicach. Responsywny design, optymalizacja SEO i niezawodne rozwiązania.',
-    images: ['/images/og-image.jpg'],
+    images: ['https://veloweb.pl/images/ogg.png'],
     creator: '@veloweb',
     site: '@veloweb'
   },
