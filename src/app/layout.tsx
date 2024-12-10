@@ -19,7 +19,7 @@ const cinzel = Cinzel_Decorative({
 export const metadata: Metadata = {
   metadataBase: new URL('https://veloweb.pl'),
   title: 'VeloWeb - Tworzenie Stron Internetowych Głogów | Projektowanie WWW',
-  description: 'Profesjonalne tworzenie stron internetowych w Głogowie. ✓ Nowoczesny design ✓ Optymalizacja SEO ✓ Responsywne strony WWW dla firm ✓ Skuteczne pozycjonowanie. Zamów swoją stronę!',
+  description: 'Profesjonalne tworzenie stron internetowych w Głogowie. ✓ Nowoczesny design ✓ Optymalizacja SEO ✓ Responsywne strony WWW dla firm ✓ Skuteczne pozycjonowanie.',
   keywords: 'tworzenie stron internetowych, strony www Głogów, projektowanie stron internetowych, strony dla firm, web development Głogów, responsywne strony www, pozycjonowanie stron, SEO Głogów',
   authors: [{ name: 'VeloWeb', url: 'https://veloweb.pl' }],
   creator: 'VeloWeb',
@@ -46,14 +46,15 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     url: 'https://veloweb.pl',
     title: 'VeloWeb - Profesjonalne Tworzenie Stron Internetowych w Głogowie',
-    description: 'Tworzymy nowoczesne strony internetowe dla firm w Głogowie i okolicach. Responsywny design, optymalizacja SEO i niezawodne rozwiązania. Sprawdź naszą ofertę!',
+    description: 'Tworzymy nowoczesne strony internetowe dla firm w Głogowie i okolicach. Responsywny design, optymalizacja SEO i niezawodne rozwiązania.',
     siteName: 'VeloWeb',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/ogg.png',
         width: 1200,
         height: 630,
-        alt: 'VeloWeb - Profesjonalne Strony Internetowe w Głogowie'
+        alt: 'VeloWeb - Profesjonalne Strony Internetowe w Głogowie',
+        type: 'image/jpeg',
       }
     ]
   },
