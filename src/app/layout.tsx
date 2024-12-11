@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Cinzel_Decorative } from 'next/font/google'
+import { Inter, Playfair_Display, Cinzel } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import CookieConsent from '@/components/layout/CookieConsent'
 import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -10,7 +11,7 @@ const playfair = Playfair_Display({
   subsets: ['latin'], 
   variable: '--font-playfair'
 })
-const cinzel = Cinzel_Decorative({
+const cinzel = Cinzel({
   weight: ['400', '700', '900'],
   subsets: ['latin'],
   variable: '--font-cinzel'
@@ -151,12 +152,31 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="bg-[#0A0F1C]">
+      <body className={inter.className}>
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        {children}
         <Footer />
+        <CookieConsent />
+        
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
       </body>
     </html>
   )

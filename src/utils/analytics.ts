@@ -2,9 +2,9 @@
 declare global {
   interface Window {
     gtag: (
-      command: 'event',
-      eventName: string,
-      eventParameters: Record<string, unknown>
+      command: 'event' | 'consent',
+      action: string,
+      params: Record<string, unknown>
     ) => void
   }
 }
